@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/REP.Application/REP.Application.csproj" />
+    <Project Path="src/REP.Domain/REP.Domain.csproj" />
+    <Project Path="src/REP.Infrastructure/REP.Infrastructure.csproj" />
+    <Project Path="src/REP.Web/REP.Web.csproj" />
+  </Folder>
+</Solution>
