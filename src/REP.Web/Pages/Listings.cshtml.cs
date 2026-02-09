@@ -19,6 +19,7 @@ public class ListingsModel : PageModel
     public async Task OnGetAsync()
     {
         Listings = await _dbContext.Listings
+            .Include(l => l.User)
             .AsNoTracking()
             .OrderByDescending(l => l.CreatedAt)
             .ToListAsync();

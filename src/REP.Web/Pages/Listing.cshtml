@@ -1,0 +1,53 @@
+@page "{id:guid}"
+@model ListingModel
+@{
+    ViewData["Title"] = Model.Listing.Title;
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Listings">Listings</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.Listing.Title</li>
+    </ol>
+</nav>
+
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title mb-3">@Model.Listing.Title</h1>
+
+        <p class="card-text fs-5">@Model.Listing.Description</p>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Price</h5>
+                @if (Model.Listing.Price is not null)
+                {
+                    <span class="fs-4 fw-bold text-success">
+                        @Model.Listing.Price.Amount.ToString("N2") @Model.Listing.Price.Currency
+                    </span>
+                }
+                else
+                {
+                    <span class="fs-4 text-muted">Price on request</span>
+                }
+            </div>
+            <div class="col-md-6">
+                <h5>Listed by</h5>
+                <p>@Model.Listing.User.Name</p>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row text-muted">
+            <div class="col-md-6">
+                <small>Created: @Model.Listing.CreatedAt.ToString("dd MMM yyyy, HH:mm")</small>
+            </div>
+            <div class="col-md-6">
+                <small>Updated: @Model.Listing.UpdatedAt.ToString("dd MMM yyyy, HH:mm")</small>
+            </div>
+        </div>
+    </div>
+</div>
