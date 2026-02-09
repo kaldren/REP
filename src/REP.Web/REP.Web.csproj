@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="3.14.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\REP.Infrastructure\REP.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

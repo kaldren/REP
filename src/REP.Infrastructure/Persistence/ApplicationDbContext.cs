@@ -1,4 +1,8 @@
-﻿namespace REP.Infrastructure.Persistence;
+﻿using Microsoft.EntityFrameworkCore;
+using REP.Application.Interfaces;
+using REP.Domain.ListingAggregate;
+
+namespace REP.Infrastructure.Persistence;
 
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
@@ -7,7 +11,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
     }
 
-    public DbSet<Course> Courses => Set<Course>();
+    public DbSet<Listing> Listings => Set<Listing>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
