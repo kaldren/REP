@@ -1,28 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using REP.Application.Interfaces;
-using REP.Domain.ListingAggregate;
+using REP.Identity.Application.Interfaces;
+using REP.Listings.Application.Interfaces;
+using REP.Listings.Application.Models;
 
 namespace REP.Web.Pages;
 
 public class ListingModel : PageModel
 {
-    private readonly IApplicationDbContext _dbContext;
+    private readonly IListingService _listingService;
+    private readonly IUserService _userService;
 
-    public ListingModel(IApplicationDbContext dbContext)
+    public ListingModel(IListingService listingService, IUserService userService)
     {
-        _dbContext = dbContext;
+        _listingService = listingService;
+        _userService = userService;
     }
 
-    public Listing Listing { get; set; } = default!;
+    public ListingResponse Listing { get; set; } = default!;
+    public string AuthorName { get; set; } = string.Empty;
 
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
-        var listing = await _dbContext.Listings
-            .Include(l => l.User)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(l => l.Id == id);
+        var listing = await _listingService.GetByIdAsync(id);
 
         if (listing is null)
         {
@@ -30,6 +30,10 @@ public class ListingModel : PageModel
         }
 
         Listing = listing;
+
+        var user = await _userService.GetByIdAsync(listing.AuthorId);
+        AuthorName = user?.Name ?? "Unknown";
+
         return Page();
     }
 }

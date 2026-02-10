@@ -21,12 +21,12 @@ else
                         <div class="card-body">
                             <h5 class="card-title">@listing.Title</h5>
                             <p class="card-text">@listing.Description</p>
-                            <small class="text-muted">Listed by @listing.User.Name</small>
+                            <small class="text-muted">Listed by @(Model.AuthorNames.GetValueOrDefault(listing.AuthorId, "Unknown"))</small>
                         </div>
                         <div class="card-footer d-flex justify-content-between align-items-center">
-                            @if (listing.Price is not null)
+                            @if (listing.PriceAmount is not null)
                             {
-                                <span class="fw-bold text-success">@listing.Price.Amount.ToString("N2") @listing.Price.Currency</span>
+                                <span class="fw-bold text-success">@listing.PriceAmount.Value.ToString("N2") @listing.PriceCurrency</span>
                             }
                             else
                             {

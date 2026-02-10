@@ -1,27 +1,29 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using REP.Application.Interfaces;
-using REP.Domain.ListingAggregate;
+using REP.Identity.Application.Interfaces;
+using REP.Listings.Application.Interfaces;
+using REP.Listings.Application.Models;
 
 namespace REP.Web.Pages;
 
 public class ListingsModel : PageModel
 {
-    private readonly IApplicationDbContext _dbContext;
+    private readonly IListingService _listingService;
+    private readonly IUserService _userService;
 
-    public ListingsModel(IApplicationDbContext dbContext)
+    public ListingsModel(IListingService listingService, IUserService userService)
     {
-        _dbContext = dbContext;
+        _listingService = listingService;
+        _userService = userService;
     }
 
-    public IReadOnlyList<Listing> Listings { get; set; } = [];
+    public IReadOnlyList<ListingResponse> Listings { get; set; } = [];
+    public IReadOnlyDictionary<Guid, string> AuthorNames { get; set; } = new Dictionary<Guid, string>();
 
     public async Task OnGetAsync()
     {
-        Listings = await _dbContext.Listings
-            .Include(l => l.User)
-            .AsNoTracking()
-            .OrderByDescending(l => l.CreatedAt)
-            .ToListAsync();
+        Listings = await _listingService.GetAllAsync();
+
+        var authorIds = Listings.Select(l => l.AuthorId).Distinct();
+        AuthorNames = await _userService.GetNamesByIdsAsync(authorIds);
     }
 }

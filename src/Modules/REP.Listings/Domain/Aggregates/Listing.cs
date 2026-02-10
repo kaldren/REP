@@ -1,6 +1,6 @@
-﻿using REP.Domain.UserAggregate;
+﻿using REP.Listings.Domain.ValueObjects;
 
-namespace REP.Domain.ListingAggregate;
+namespace REP.Listings.Domain.Aggregates;
 
 public class Listing
 {
@@ -8,8 +8,7 @@ public class Listing
     public string Title { get; set; }
     public string Description { get; set; }
     public Price? Price { get; set; }
-    public Guid UserId { get; set; }
-    public User User { get; set; }
+    public Guid AuthorId { get; set; }
     public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset UpdatedAt { get; set; }
 }

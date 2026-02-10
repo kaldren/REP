@@ -1,4 +1,4 @@
-﻿namespace REP.Domain.ListingAggregate;
+﻿namespace REP.Listings.Domain.ValueObjects;
 
 public record Price
 {

@@ -1,8 +1,9 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="src/REP.Application/REP.Application.csproj" />
-    <Project Path="src/REP.Domain/REP.Domain.csproj" />
-    <Project Path="src/REP.Infrastructure/REP.Infrastructure.csproj" />
     <Project Path="src/REP.Web/REP.Web.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/">
+    <Project Path="src/Modules/REP.Identity/REP.Identity.csproj" Id="eb993b39-7466-4ca8-bb61-8b48da9d8bb9" />
+    <Project Path="src/Modules/REP.Listings/REP.Listings.csproj" Id="52718bbf-c20d-4d86-a96c-3f89e6979797" />
   </Folder>
 </Solution>

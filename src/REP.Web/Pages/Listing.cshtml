@@ -22,10 +22,10 @@
         <div class="row">
             <div class="col-md-6">
                 <h5>Price</h5>
-                @if (Model.Listing.Price is not null)
+                @if (Model.Listing.PriceAmount is not null)
                 {
                     <span class="fs-4 fw-bold text-success">
-                        @Model.Listing.Price.Amount.ToString("N2") @Model.Listing.Price.Currency
+                        @Model.Listing.PriceAmount.Value.ToString("N2") @Model.Listing.PriceCurrency
                     </span>
                 }
                 else
@@ -35,7 +35,7 @@
             </div>
             <div class="col-md-6">
                 <h5>Listed by</h5>
-                <p>@Model.Listing.User.Name</p>
+                <p>@Model.AuthorName</p>
             </div>
         </div>
 

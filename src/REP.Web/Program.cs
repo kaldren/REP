@@ -1,10 +1,8 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
-using REP.Infrastructure;
+using REP.Identity.Infrastructure;
+using REP.Listings.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,11 +18,13 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddRazorPages()
     .AddMicrosoftIdentityUI();
 
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddIdentityModule(builder.Configuration);
+builder.Services.AddListingsModule(builder.Configuration);
 
 var app = builder.Build();
 
-await app.Services.SeedDatabaseAsync();
+await app.Services.SeedIdentityAsync();
+await app.Services.SeedListingsAsync();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
