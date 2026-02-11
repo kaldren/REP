@@ -4,6 +4,83 @@
     ViewData["Title"] = "Create Listing";
 }
 
+<style>
+    .photo-preview-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .photo-preview-thumb {
+        width: 80px;
+        height: 80px;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        overflow: hidden;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .photo-preview-thumb:hover {
+        border-color: var(--bs-primary);
+        transform: scale(1.05);
+    }
+
+    .photo-preview-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 1050;
+        background: rgba(0, 0, 0, 0.85);
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .lightbox.active {
+        display: flex;
+    }
+
+    .lightbox img {
+        max-width: 90vw;
+        max-height: 80vh;
+        object-fit: contain;
+        border-radius: 6px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-close {
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+        font-size: 2.5rem;
+        color: #fff;
+        cursor: pointer;
+        line-height: 1;
+        z-index: 1051;
+    }
+
+    .lightbox-close:hover {
+        color: #ccc;
+    }
+
+    .lightbox-caption {
+        color: #ddd;
+        margin-top: 0.75rem;
+        font-size: 0.9rem;
+        text-align: center;
+        max-width: 80vw;
+    }
+</style>
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-page="/Listings">Listings</a></li>
@@ -58,6 +135,12 @@
     </div>
 </div>
 
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+    <img id="lightbox-img" src="" alt="" />
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+</div>
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
@@ -70,23 +153,44 @@
                     continue;
 
                 const reader = new FileReader();
+                const fileName = file.name;
                 reader.onload = function (e) {
                     const div = document.createElement('div');
                     div.className = 'photo-preview-thumb';
+                    div.title = fileName;
+                    div.onclick = function () { openLightbox(e.target.result, fileName); };
 
                     const img = document.createElement('img');
                     img.src = e.target.result;
-                    img.alt = file.name;
-
-                    const name = document.createElement('small');
-                    name.textContent = file.name;
-                    name.className = 'photo-preview-name';
+                    img.alt = fileName;
 
                     div.appendChild(img);
-                    div.appendChild(name);
                     preview.appendChild(div);
                 };
                 reader.readAsDataURL(file);
+            }
+        });
+
+        function openLightbox(src, alt) {
+            const lb = document.getElementById('lightbox');
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox-img').alt = alt;
+            document.getElementById('lightbox-caption').textContent = alt;
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
     </script>
