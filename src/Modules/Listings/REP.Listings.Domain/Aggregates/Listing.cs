@@ -1,3 +1,4 @@
+using REP.Listings.Domain.Entities;
 using REP.Listings.Domain.ValueObjects;
 
 namespace REP.Listings.Domain.Aggregates;
@@ -11,4 +12,5 @@ public class Listing
     public Guid AuthorId { get; set; }
     public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset UpdatedAt { get; set; }
+    public ICollection<Photo> Photos { get; set; } = [];
 }
