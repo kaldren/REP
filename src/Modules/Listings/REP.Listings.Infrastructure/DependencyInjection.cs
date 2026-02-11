@@ -1,3 +1,4 @@
+using Azure.Storage.Blobs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,13 @@ public static class DependencyInjection
 
         services.AddScoped<IListingsDbContext>(sp => sp.GetRequiredService<ListingsDbContext>());
         services.AddScoped<IListingService, ListingService>();
+
+        var storageConnectionString = configuration.GetValue<string>("AzureStorage:ConnectionString")
+            ?? throw new InvalidOperationException("AzureStorage:ConnectionString is not configured.");
+        var containerName = configuration.GetValue<string>("AzureStorage:ListingImagesContainer") ?? "listing-images";
+
+        services.AddSingleton(_ => new BlobContainerClient(storageConnectionString, containerName));
+        services.AddScoped<IPhotoStorageService, BlobPhotoStorageService>();
 
         return services;
     }

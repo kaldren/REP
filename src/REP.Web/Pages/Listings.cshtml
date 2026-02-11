@@ -6,6 +6,10 @@
 
 <h1>Listings</h1>
 
+<div class="mb-4">
+    <a asp-page="/CreateListing" class="btn btn-primary">+ Create Listing</a>
+</div>
+
 @if (Model.Listings.Count == 0)
 {
     <div class="alert alert-info">No listings found.</div>

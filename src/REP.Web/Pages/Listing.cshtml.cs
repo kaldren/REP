@@ -10,15 +10,18 @@ public class ListingModel : PageModel
 {
     private readonly IListingService _listingService;
     private readonly IUserService _userService;
+    private readonly IPhotoStorageService _photoStorageService;
 
-    public ListingModel(IListingService listingService, IUserService userService)
+    public ListingModel(IListingService listingService, IUserService userService, IPhotoStorageService photoStorageService)
     {
         _listingService = listingService;
         _userService = userService;
+        _photoStorageService = photoStorageService;
     }
 
     public ListingResponse Listing { get; set; } = default!;
     public string AuthorName { get; set; } = string.Empty;
+    public IReadOnlyList<PhotoResponse> Photos { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
@@ -30,6 +33,7 @@ public class ListingModel : PageModel
         }
 
         Listing = listing;
+        Photos = await _photoStorageService.ListAsync(id);
 
         var user = await _userService.GetByIdAsync(listing.AuthorId);
         AuthorName = user?.Name ?? "Unknown";

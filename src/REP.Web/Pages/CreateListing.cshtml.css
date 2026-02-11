@@ -1,0 +1,29 @@
+.photo-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.5rem;
+}
+
+.photo-preview-thumb {
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.photo-preview-thumb img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+}
+
+.photo-preview-name {
+    display: block;
+    padding: 0.25rem;
+    font-size: 0.7rem;
+    color: #6c757d;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

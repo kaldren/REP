@@ -8,4 +8,5 @@ public record ListingResponse(
     string? PriceCurrency,
     Guid AuthorId,
     DateTimeOffset CreatedAt,
-    DateTimeOffset UpdatedAt);
+    DateTimeOffset UpdatedAt,
+    IReadOnlyList<PhotoResponse> Photos);

@@ -10,6 +10,10 @@ public class PhotoConfiguration : IEntityTypeConfiguration<Photo>
     {
         builder.HasKey(x => x.Id);
 
+        builder.Property(x => x.FileName)
+            .IsRequired()
+            .HasMaxLength(256);
+
         builder.Property(x => x.Url)
             .IsRequired()
             .HasMaxLength(2048);

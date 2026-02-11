@@ -1,0 +1,72 @@
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.5rem;
+}
+
+.photo-thumb {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.photo-thumb:hover {
+    border-color: var(--bs-primary);
+    transform: scale(1.03);
+}
+
+.photo-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    background: rgba(0, 0, 0, 0.85);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 1051;
+}
+
+.lightbox-close:hover {
+    color: #ccc;
+}
+
+.lightbox-caption {
+    color: #ddd;
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    text-align: center;
+    max-width: 80vw;
+}
