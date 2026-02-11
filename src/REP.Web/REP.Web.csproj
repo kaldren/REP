@@ -16,8 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Modules\REP.Identity\REP.Identity.csproj" />
-    <ProjectReference Include="..\Modules\REP.Listings\REP.Listings.csproj" />
+    <ProjectReference Include="..\Modules\Users\REP.Users.Application\REP.Users.Application.csproj" />
+    <ProjectReference Include="..\Modules\Users\REP.Users.Infrastructure\REP.Users.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Listings\REP.Listings.Application\REP.Listings.Application.csproj" />
+    <ProjectReference Include="..\Modules\Listings\REP.Listings.Infrastructure\REP.Listings.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

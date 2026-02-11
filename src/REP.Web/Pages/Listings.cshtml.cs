@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using REP.Identity.Application.Interfaces;
+using REP.Users.Application.Interfaces;
 using REP.Listings.Application.Interfaces;
 using REP.Listings.Application.Models;
 

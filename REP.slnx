@@ -2,8 +2,14 @@
   <Folder Name="/src/">
     <Project Path="src/REP.Web/REP.Web.csproj" />
   </Folder>
-  <Folder Name="/src/Modules/">
-    <Project Path="src/Modules/REP.Identity/REP.Identity.csproj" Id="eb993b39-7466-4ca8-bb61-8b48da9d8bb9" />
-    <Project Path="src/Modules/REP.Listings/REP.Listings.csproj" Id="52718bbf-c20d-4d86-a96c-3f89e6979797" />
+  <Folder Name="/src/Modules/Users/">
+    <Project Path="src/Modules/Users/REP.Users.Domain/REP.Users.Domain.csproj" />
+    <Project Path="src/Modules/Users/REP.Users.Application/REP.Users.Application.csproj" />
+    <Project Path="src/Modules/Users/REP.Users.Infrastructure/REP.Users.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Listings/">
+    <Project Path="src/Modules/Listings/REP.Listings.Domain/REP.Listings.Domain.csproj" />
+    <Project Path="src/Modules/Listings/REP.Listings.Application/REP.Listings.Application.csproj" />
+    <Project Path="src/Modules/Listings/REP.Listings.Infrastructure/REP.Listings.Infrastructure.csproj" />
   </Folder>
 </Solution>
